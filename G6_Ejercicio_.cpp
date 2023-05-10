@@ -32,7 +32,6 @@ class Alumno{
 class Grupo{
     public:
         vector<Alumno> alumnos;                                 //Atributos: vectores de Clase Alumno y int cantidad
-        vector<Alumno> _alumnos;
         static int cantidad;
 
         Grupo(int cantidad, vector<Alumno> alumnos){            //Constructor: recibe cantidad, vector de Clase Alumno
