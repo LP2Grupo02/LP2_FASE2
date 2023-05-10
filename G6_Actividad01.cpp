@@ -3,11 +3,11 @@
 #include <vector>
 
 using namespace std;
-
+// Creamos la clase Estudiante
 class Estudiante {
 public:
     Estudiante(string nombre = "", int edad = 0, double nota1 = 0, double nota2 = 0)
-        : nombre_(nombre), edad_(edad), nota1_(nota1), nota2_(nota2) {}
+        : nombre_(nombre), edad_(edad), nota1_(nota1), nota2_(nota2) {} // Este es un constructor con atributos por defecto
 
     string nombre() const { return nombre_; }
     int edad() const { return edad_; }
@@ -21,7 +21,7 @@ private:
     double nota1_;
     double nota2_;
 };
-
+// Creamos la funcion impriestudiantes que se encargara de imprimir el vector Estudiante
 void impriestudiantes(const vector<Estudiante>& estudiantes) {
     for (const Estudiante& estudiante : estudiantes) {
         cout << "Nombre: " << estudiante.nombre() << endl;
@@ -31,7 +31,7 @@ void impriestudiantes(const vector<Estudiante>& estudiantes) {
         cout << "Promedio: " << estudiante.promedio() << endl << endl;
     }
 }
-
+// creamos la funcion ordpromedio que ordenara los promedios de forma descendente
 void ordpromedio(vector<Estudiante>& estudiantes) {
     int n = estudiantes.size();
     for (int i = 0; i < n - 1; i++) {
