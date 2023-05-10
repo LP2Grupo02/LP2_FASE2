@@ -44,7 +44,7 @@ class Grupo{
         void Imprimir(){                                        //Método: muestra los alumnos con sus atributos y la cantidad de ellos
             cout<<"Cantidad: "<<cantidad<<endl;
             for(size_t i = 0; i < alumnos.size(); i++){         //size_t: tipo de dato, entero sin signo (parecido a int)
-                cout<<"Alumno Nº"<<i<<": "<<endl;
+                cout<<"Alumno 0"<<i<<": "<<endl;
                 cout<<"Nombre: "<<alumnos[i].nombre<<endl;
                 cout<<"Edad: "<<alumnos[i].edad<<endl;
                 cout<<"Promedio: "<<alumnos[i].promedio<<endl;
@@ -96,9 +96,14 @@ class Grupo{
         }
 };
 
+int cnt;
+int Grupo::cantidad = cnt;
+
 int main(){
-    Grupo grupo(5);                                             //Declaramos un objeto grupo con 5 elementos
-    grupo.AgregarAlumno("", 0, 0.0);                            //Agregamos sus alumnos
+    cout<<"Ingrese la cantidad de alumnos que estaran en el grupo: "<<endl;
+    cin>>cnt;
+    Grupo grupo(cnt);                                             //Declaramos un objeto grupo con 5 elementos
+    grupo.AgregarAlumno("", 0, 0.0);                              //Agregamos sus alumnos
     grupo.AgregarAlumno("", 0, 0.0);
     grupo.AgregarAlumno("", 0, 0.0);
     grupo.AgregarAlumno("", 0, 0.0);
