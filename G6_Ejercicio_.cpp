@@ -3,12 +3,18 @@
 #include <vector>
 using namespace std;
 
-class Alumno{
+class Alumno {
     public:
         string nombre;                              //Atributos: str nombre, int edad, float promedio
         int edad;
         float promedio;
         
+        Alumno(){
+            this->nombre = "ABC";
+            this->edad = 0;
+            this->promedio = 0.0;
+        }
+
         Alumno(string nm, int ed, float pro){       //Constructor: Recibe nombre, edad y promedio 
             this->nombre = nm;
             this->edad = ed;
@@ -16,20 +22,26 @@ class Alumno{
         }
 
         void Imprimir(){                            //Método: muestra los atributos del alumno
-            cout<<"Nombre: "<<nombre<<endl;
-            cout<<"Edad: "<<edad<<endl;
-            cout<<"Promedio: "<<promedio<<endl;
+            cout << "Nombre: " << nombre << endl;
+            cout << "Edad: " << edad << endl;
+            cout << "Promedio: " << promedio << endl;
         }
 
-        bool Compara(Alumno &A1, Alumno &A2){      //Método: compara promedios de un objeto (A1) 
-            if (A1.promedio < A2.promedio){        //a otro objeto (A2) y muestra true 
-                return true;                       //si el promedio de A1 es mayor
-            }
-            return false;
+        bool operator<(const Alumno& other) {       //Método: compara promedios de un objeto (A1) 
+            return promedio > other.promedio;       //a otro objeto (A2) y muestra true si el promedio de A1 es mayor
         }
+
+        friend ostream& operator<<(ostream& os, const Alumno& alumno) {
+            os << "Nombre: " << alumno.nombre << endl;
+            os << "Edad: " << alumno.edad << endl;
+            os << "Promedio: " << alumno.promedio << endl;
+            return os;
+        }
+
+        friend class Grupo; // Declaración de amistad con la clase Grupo
 };
 
-class Grupo{
+class Grupo {
     public:
         vector<Alumno> alumnos;                                 //Atributos: vectores de Clase Alumno y int cantidad
         static int cantidad;
@@ -52,13 +64,13 @@ class Grupo{
         }
 
         void AgregarAlumno(string nm, int ed, float pro){       //Método: Agrega alumnos al vector con sus respectivos atributos
-            while(alumnos.size() < cantidad){
-                cout<<"Ingrese su nombre: "<<endl;
-                cin>>nm;
-                cout<<"Ingrese su edad: "<<endl;
-                cin>>ed;
-                cout<<"Ingrese su promedio: "<<endl;
-                cin>>pro;
+            while (alumnos.size() < cantidad) {
+                cout << "Ingrese su nombre: " << endl;
+                cin >> nm;
+                cout << "Ingrese su edad: " << endl;
+                cin >> ed;
+                cout << "Ingrese su promedio: " << endl;
+                cin >> pro;
                 Alumno NuevoAlumno(nm, ed, pro);                    //Crea un objeto Alumno, con sus atributos
                 alumnos.push_back(NuevoAlumno);                     //Agrega al final al objeto alumno en el vector alumnos
             }
@@ -69,14 +81,12 @@ class Grupo{
             for(size_t i = 0; i < alumnos.size() - 1; i++){     //Recorremos el vector, desde 0
                 for(size_t j = i+1; j < alumnos.size(); j++){   //Volvemos a recorrer el vector, desde 1
                     if(alumnos[j].promedio < alumnos[i].promedio){      //Buscamos el menor promedio 
-                        Alumno VarTemp = alumnos[i];            //Equivalente
-                        alumnos[i] = alumnos[j];                //a swap()
-                        alumnos[j] = VarTemp;                   //: Intercambia valores
+                        swap(alumnos[i], alumnos[j]);
                     }
                 }
             }
         }
-        
+
         float PromedioGrupo(){                                  //Método: hace un promedio de los promedios de los alumnos, promedio grupal
             float sum = 0.0;                                    //Variable float sum
             for(size_t i = 0; i < alumnos.size(); i++){         //Recorremos el vector alumnos
@@ -96,15 +106,13 @@ class Grupo{
         }
 };
 
-int cnt;
-int Grupo::cantidad = cnt;
+int Grupo::cantidad = 0;
 
-int main(){
-    cout<<"Ingrese la cantidad de alumnos que estaran en el grupo: "<<endl;
-    cin>>cnt;
-    Grupo grupo(cnt);                                             //Declaramos un objeto grupo con 5 elementos
-    grupo.AgregarAlumno("", 0, 0.0);                              //Agregamos sus alumnos
-    grupo.AgregarAlumno("", 0, 0.0);
+int main() {
+    cout<<"Ingrese la cantidad de alumnos que estarán en el grupo: " << endl;
+    cin>>Grupo::cnt;
+    Grupo grupo(Grupo::cnt);                                  //Declaramos un objeto grupo con cnt elementos
+    grupo.AgregarAlumno("", 0, 0.0);                              //Agregamos sus alumnos    grupo.AgregarAlumno("", 0, 0.0);
     grupo.AgregarAlumno("", 0, 0.0);
     grupo.AgregarAlumno("", 0, 0.0);
     grupo.AgregarAlumno("", 0, 0.0);
