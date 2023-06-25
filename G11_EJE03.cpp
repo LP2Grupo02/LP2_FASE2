@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 using namespace std;
+// se crea un struct
 struct datos {
     string numero;
     string correo;
@@ -10,6 +11,7 @@ string nombre;
 string numero;
 string correo;
 map<string, datos> agenda;  // aqui se declara el mapa de la agenda de contactos
+// funcion para buscar contactos en el mapa
 void buscarcontacto(string u) {
     if (agenda.find(u) != agenda.end()) {
         cout << "Contacto encontrado:" << endl;
@@ -35,7 +37,7 @@ int main(){
     numero = "943273418";
     correo = "laurauwu@gmail.com";
     agenda[nombre] = { numero, correo };
-
+// creamos un while para repetir el menu
     while (i != 5) {
         cout << "******MENU******" << endl;;
         cout << "ELIJA UNA DE LAS SIGUIENTES OPCIONES" << endl;
@@ -47,6 +49,7 @@ int main(){
         cin >> i;
         switch (i) {
             case 1:
+                // aqui se agregara u nuevo contacto por teclado
                 cout << "Ingrese el nombre del contacto: ";
                 cin >> nombre;
                 cout << "Ingrese el numero de telefono: ";
@@ -61,6 +64,7 @@ int main(){
                 buscarcontacto(nombre);
                 break;
             case 3:
+                //aqui se modificara un contacto 
                 cout << "Ingrese el nombre del contacto a modificar: ";
                 cin >> nombre;
                 cout << "Ingrese el nuevo numero de telefono: ";
